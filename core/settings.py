@@ -128,10 +128,9 @@ def startup_check():
 
 def files_check():
     # load random messages for aiya to say
-    with open('resources/messages.csv') as csv_file:
-        message_data = list(csv.reader(csv_file, delimiter='|'))
-        for row in message_data:
-            global_var.wait_message.append(row[0])
+    with open('resources/gutenberg-poetry-v001.ndjson.gz') as poetry_file:
+        for line in poetry_file:
+            global_var.wait_message.append(json.loads(line.strip()))
     global_var.wait_message_count = len(global_var.wait_message) - 1
 
     # creating files if they don't exist
